@@ -66,10 +66,10 @@ SELECT sum(quantity)
 FROM BIT_DB.FebSales 
 WHERE orderdate like '02/18/19%';
 
-select product, (quantity)
-FROM BIT_DB.FebSales
-where location like '%Los Angeles%'
-order by product asc;
+SELECT Product, SUM(quantity)
+FROM BIT_DB.FebSales 
+WHERE location like '%Los Angeles%'
+GROUP BY Product;
 
 
 
