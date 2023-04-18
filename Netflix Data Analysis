@@ -1,0 +1,45 @@
+#In this SQL code, I'm querying a database that's holding Nexflix data to answer questions about the data. 
+
+Select 
+people.director,
+titles.type,
+titles.country,
+titles.rating,
+titles.duration
+FROM "CharlotteChaze/BreakIntoTech"."netflix_people" people
+LEFT JOIN "CharlotteChaze/BreakIntoTech"."netflix_titles_info" titles
+ON people.show_id = titles.show_id;
+
+--Total number of movies in the database
+select count(*) 
+FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info" titles
+where type = 'Movie';
+
+--finding the most recent batch of shows and movies added to the database
+select max(date(date_added))
+FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info";
+
+--alphabetically listing all the shows and movies in the database
+SELECT title 
+FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info"
+ORDER BY title ASC;
+
+-- finding the info for the bright star movie
+select title,type,show_id
+from  "CharlotteChaze/BreakIntoTech"."netflix_titles_info"
+where title = 'Bright Star';
+
+--finding the director of the bright star movie
+select 
+director
+FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info" titles
+LEFT JOIN "CharlotteChaze/BreakIntoTech"."netflix_people" people
+ON titles.show_id = people.show_id
+where title = 'Bright Star';
+
+--finding the oldest movie in the database and year produced
+SELECT title, release_year
+FROM  "CharlotteChaze/BreakIntoTech"."netflix_titles_info" titles
+WHERE titles.type = 'Movie'
+ORDER BY titles.release_year ASC
+LIMIT 1;
